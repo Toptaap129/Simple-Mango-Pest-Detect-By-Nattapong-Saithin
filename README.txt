@@ -91,6 +91,6 @@ python 2.Backend.py
 - ไฟล์ Checkpoint (.pt) ถูกออกแบบให้เป็น "Inference-Ready" คือบรรจุทั้ง Model Weights, 
   Class Names และ Image Size ไว้ด้วยกัน ทำให้โหลดไปใช้งานต่อได้ทันทีโดยไม่ต้องแก้โค้ด
 - หากไม่มี GPU สามารถรันบน CPU ได้ แต่จะใช้ระยะเวลาในการฝึกสอนนานกว่ามาก
-- พัฒนาโดย: Nattapong Saithin (Dev. By T-A-N ❤️)
+- พัฒนาโดย: Nattapong Saithin - TOP (Dev. By Top-Aum-Nut ❤️)
 
 ================================================================================
