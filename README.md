@@ -1,16 +1,94 @@
 # Mango-Pest-Detect-By-Nattapong-Saithin
-🍋 Mango Pest Detection using ML/AI
-This repository contains my first project in Machine Learning and Artificial Intelligence, focusing on the detection and classification of mango pests.
-The aim is to build a model that can automatically identify pests affecting mango crops, supporting farmers and researchers in pest management and improving crop yield.
+โปรเจกต์นี้พัฒนาขึ้นเพื่อช่วยเกษตรกรและนักวิจัยในการระบุโรคและศัตรูพืชของมะม่วง
+โดยอัตโนมัติด้วยเทคโนโลยี Machine Learning และ Deep Learning (CNN) 
+เพื่อสนับสนุนการเกษตรอัจฉริยะ (Smart Agriculture) และเพิ่มผลผลิตอย่างยั่งยืน
 
-🚀 Project Objectives
-Build and preprocess a dataset of mango pests (images + labels).
-Apply Machine Learning and Deep Learning models for classification.
-Evaluate performance using Accuracy, Precision, and Recall.
-Explore improvements with CNN-based architectures.
+================================================================================
+🛠️ สิ่งที่ต้องเตรียม (Prerequisites)
+================================================================================
+1. Python เวอร์ชัน 3.8 - 3.10
+2. NVIDIA GPU และ CUDA Toolkit (แนะนำสำหรับการฝึกโมเดลให้เร็วขึ้น)
+3. Terminal หรือ Command Prompt
 
-🌱 Motivation
-Mango is one of the most important fruits in tropical regions, but pests significantly reduce yield and quality.
-By applying AI-based classification, this project contributes to smart agriculture and sustainable farming practices.
+================================================================================
+🚀 ขั้นตอนการติดตั้งและใช้งาน (Step-by-Step)
+================================================================================
 
-Thank You
+ขั้นตอนที่ 1: เตรียม Environment
+----------------------------------------
+เปิด Terminal แล้วพิมพ์คำสั่งดังนี้:
+python -m venv venv
+
+# สำหรับ Windows
+venv\Scripts\activate
+# สำหรับ macOS / Linux
+source venv/bin/activate
+
+ขั้นตอนที่ 2: ติดตั้ง Library ที่จำเป็น
+----------------------------------------
+pip install -r requirements.txt
+
+ขั้นตอนที่ 3: เตรียมข้อมูลรูปภาพ (Dataset)
+----------------------------------------
+สร้างโฟลเดอร์ชื่อ "Dataset" และวางรูปภาพโดยจัดโครงสร้างดังนี้:
+Dataset/
+ ├── train/
+ │    ├── Anthracnose/
+ │    └── Whitefly/
+ ├── val/
+ │    ├── Anthracnose/
+ │    └── Whitefly/
+ └── test/
+      ├── Anthracnose/
+      └── Whitefly/
+(หมายเหตุ: หากมีโฟลเดอร์เดียว ระบบจะแบ่งข้อมูล Train/Val/Test ให้เองอัตโนมัติในสัดส่วน 70/15/15)
+
+ขั้นตอนที่ 4: ฝึกสอนโมเดล (Training)
+----------------------------------------
+รันสคริปต์ฝึกโมเดล (รองรับการทำงานแบบ CUDA Acceleration):
+python 1.AI-Model.py --data_path Dataset --img_size 96 --epochs 50 --batch_size 32
+
+*ผลลัพธ์: ไฟล์โมเดลที่ดีที่สุดจะถูกบันทึกเป็น "best_model.pt" ในโฟลเดอร์ "checkpoints/"*
+
+ขั้นตอนที่ 5: เปิดระบบหลังบ้าน (Backend API)
+----------------------------------------
+คัดลอกไฟล์ "best_model.pt" จากโฟลเดอร์ checkpoints/ มาไว้ที่โฟลเดอร์หลักของโปรเจกต์
+จากนั้นรันเซิร์ฟเวอร์:
+python 2.Backend.py
+
+*ระบบจะทำงานที่ http://0.0.0.0:5000 และพร้อมรับคำขอ*
+
+ขั้นตอนที่ 6: ทดสอบการทำงานผ่านหน้าเว็บ (Frontend)
+----------------------------------------
+1. เปิดไฟล์ "3.index.html" ด้วยเว็บเบราว์เซอร์ (เช่น Chrome, Edge)
+2. คลิก "เลือกไฟล์ภาพ" เพื่ออัปโหลดรูปใบมะม่วงที่ต้องการตรวจ
+3. คลิก "วิเคราะห์ภาพ"
+4. ระบบจะแสดงชื่อโรค/ศัตรูพืช พร้อมระดับความมั่นใจ (Confidence Score)
+
+================================================================================
+🦠 โรคและศัตรูพืชที่รองรับ (ตัวอย่าง)
+================================================================================
+- โรคใบจุดสีน้ำตาล (Anthracnose) : พบบ่อยในฤดูฝน ระวังการรดน้ำมากเกินไป
+- แมลงหวี่ขาว (Whitefly) : ดูดกินน้ำเลี้ยงพืช ใช้กับดักสีเหลืองหรือสารชีวภัณฑ์ควบคุม
+- โรคใบแห้ง (Leaf Spot) : เกิดจากเชื้อรา ควรตัดใบที่เป็นโรคทิ้ง
+- โรคเน่าดำ (Black Mould Rot) : เกิดในช่วงความชื้นสูง ควรลดความชื้นในแปลง
+
+================================================================================
+📂 โครงสร้างไฟล์หลัก
+================================================================================
+├── 1.AI-Model.py       : สคริปต์ฝึกสอนโมเดล (PyTorch + CUDA Optimized)
+├── 2.Backend.py        : สคริปต์เซิร์ฟเวอร์ API (Flask + PyTorch Inference)
+├── 3.index.html        : หน้าเว็บสำหรับให้ผู้ใช้งานอัปโหลดและดูผลลัพธ์
+├── requirements.txt    : รายการ Library ที่ต้องติดตั้ง
+├── checkpoints/        : โฟลเดอร์เก็บไฟล์โมเดลที่ฝึกเสร็จแล้ว (.pt)
+└── Dataset/            : โฟลเดอร์สำหรับใส่รูปภาพฝึกสอน
+
+================================================================================
+💡 หมายเหตุทางเทคนิค (Technical Notes)
+================================================================================
+- ไฟล์ Checkpoint (.pt) ถูกออกแบบให้เป็น "Inference-Ready" คือบรรจุทั้ง Model Weights, 
+  Class Names และ Image Size ไว้ด้วยกัน ทำให้โหลดไปใช้งานต่อได้ทันทีโดยไม่ต้องแก้โค้ด
+- หากไม่มี GPU สามารถรันบน CPU ได้ แต่จะใช้ระยะเวลาในการฝึกสอนนานกว่ามาก
+- พัฒนาโดย: Nattapong Saithin - TOP (Dev. By Top-Aum-Nut ❤️)
+
+================================================================================
