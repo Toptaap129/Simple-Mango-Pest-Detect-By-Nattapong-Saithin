@@ -1,16 +1,64 @@
-# Mango-Pest-Detect-By-Nattapong-Saithin
-🍋 Mango Pest Detection using ML/AI
-This repository contains my first project in Machine Learning and Artificial Intelligence, focusing on the detection and classification of mango pests.
-The aim is to build a model that can automatically identify pests affecting mango crops, supporting farmers and researchers in pest management and improving crop yield.
+============================================================================
+🥭 MANGO PEST DETECTION (ระบบตรวจจับโรคและศัตรูพืชในมะม่วง)
+============================================================================
+โปรเจกต์ AI/Deep Learning แรกของฉัน สำหรับตรวจจับและจำแนกประเภทโรคและศัตรูพืช
+ที่เกิดขึ้นกับใบและผลมะม่วง เพื่อช่วยสนับสนุนเกษตรกรในการจัดการและเพิ่มผลผลิต
 
-🚀 Project Objectives
-Build and preprocess a dataset of mango pests (images + labels).
-Apply Machine Learning and Deep Learning models for classification.
-Evaluate performance using Accuracy, Precision, and Recall.
-Explore improvements with CNN-based architectures.
+🚀 วัตถุประสงค์ของโปรเจกต์ (Project Objectives)
+----------------------------------------------------------------------------
+* รวบรวมและเตรียมข้อมูลรูปภาพศัตรูพืชและโรคมะม่วง (Data Preprocessing)
+* พัฒนาโมเดลจำแนกประเภทภาพถ่ายด้วยสถาปัตยกรรม CNN (PyTorch)
+* เพิ่มประสิทธิภาพการประมวลผลและการเทรนด้วย GPU ผ่านระบบ CUDA
+* พัฒนา Web API (Flask) เพื่อนำโมเดลไปใช้งานจริง (Inference Server)
 
-🌱 Motivation
-Mango is one of the most important fruits in tropical regions, but pests significantly reduce yield and quality.
-By applying AI-based classification, this project contributes to smart agriculture and sustainable farming practices.
+📦 โครงสร้างโปรเจกต์ (Project Structure)
+----------------------------------------------------------------------------
+├── train.py              # สคริปต์หลักสำหรับเทรนโมเดล (รองรับ CUDA แข็งแกร่ง)
+├── app.py                # ระบบหลังบ้าน API Server (Flask) สำหรับส่งภาพไปประมวลผล
+├── requirements.txt      # รายการไลบรารีและเวอร์ชันที่ต้องติดตั้ง
+└── Dataset/              # โฟลเดอร์เก็บข้อมูลรูปภาพสำหรับเทรน (ต้องเตรียมเอง)
+    ├── train/            # ภาพสำหรับเทรนโมเดล แยกเป็นรายโฟลเดอร์ตามชื่อโรค
+    ├── val/              # ภาพสำหรับทดสอบระหว่างเทรน
+    └── test/             # ภาพสำหรับวัดผลหลังเทรนเสร็จ
 
-Thank You
+🛠️ วิธีการติดตั้งและใช้งาน (Step-by-Step Guide)
+----------------------------------------------------------------------------
+
+ขั้นตอนที่ 1: การติดตั้งไลบรารีที่จำเป็น
+เปิด Terminal หรือ Command Prompt แล้วติดตั้งชุดคำสั่งต่อไปนี้:
+$ pip install -r requirements.txt
+
+ขั้นตอนที่ 2: การเทรนโมเดล (Training Phase)
+จัดเตรียมภาพของคุณลงในโฟลเดอร์ Dataset จากนั้นรันคำสั่งเทรนโมเดล:
+$ python train.py --data_path Dataset --img_size 96 --batch_size 320 --epochs 50
+
+* เมื่อเทรนเสร็จสมบูรณ์ ระบบจะสร้างไฟล์โมเดลที่ดีที่สุดไว้ที่ `checkpoints/best_model.pt`
+* กราฟสรุปผลการเทรนจะถูกบันทึกไว้ในโฟลเดอร์ `plots/`
+* รายงานสรุปผลภาพรวมจะถูกบันทึกในโฟลเดอร์ `logs/`
+
+ขั้นตอนที่ 3: เปิดใช้งาน API Server (Deployment Phase)
+คัดลอกไฟล์ `best_model.pt` จากโฟลเดอร์ checkpoints มาไว้ที่โฟลเดอร์หลัก (Root) 
+จากนั้นรันเซิร์ฟเวอร์เพื่อให้ระบบพร้อมใช้งาน:
+$ python app.py
+
+* ระบบ API จะทำงานที่พอร์ต http://localhost:5000
+* คุณสามารถส่งภาพผ่าน HTTP POST request ไปที่ endpoint `/predict` โดยแนบไฟล์ภาพในคีย์ `image`
+
+📋 ข้อมูลโรคและศัตรูพืชที่ระบบรองรับเบื้องต้น
+----------------------------------------------------------------------------
+1. โรคใบจุดสีน้ำตาล (Anthracnose)
+2. แมลงหวี่ขาว (Whitefly)
+3. โรคใบแห้ง (Leaf Spot)
+4. โรคเน่าดำ (Black Mould Rot)
+
+💡 การนำไปต่อยอด (Future Improvements)
+----------------------------------------------------------------------------
+* ขยายฐานข้อมูลรูปภาพให้ครอบคลุมและหลากหลายสายพันธุ์มะม่วงมากขึ้น
+* พัฒนาหน้าต่างโปรแกรมสำหรับเชื่อมต่อกับเว็บบราวเซอร์ (Frontend Web UI)
+* พัฒนาแอปพลิเคชันบนมือถือเพื่อให้เกษตรกรสามารถสแกนโรคพืชในสวนได้ทันที
+
+----------------------------------------------------------------------------
+🌿 พัฒนาโดย: Nattapong Saithin (T-A-N)
+ขอขอบคุณสำหรับการเยี่ยมชมโปรเจกต์เกษตรอัจฉริยะชิ้นนี้!
+============================================================================
+
