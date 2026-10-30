@@ -1,0 +1,35 @@
+2026-10-30 21:50:44,523 [INFO] ================================================================================
+2026-10-30 21:50:44,523 [INFO] 🥭 MANGO PEST DETECTION API SERVER STARTING
+2026-10-30 21:50:44,523 [INFO] ================================================================================
+2026-10-30 21:50:44,523 [INFO] 🚀 Loading model from best_model.pt...
+2026-10-30 21:50:44,523 [INFO]    Device: cuda
+2026-10-30 21:50:44,631 [INFO]    Checkpoint Info:
+2026-10-30 21:50:44,631 [INFO]       → Classes: 13
+2026-10-30 21:50:44,631 [INFO]       → Image Size: 96x96
+2026-10-30 21:50:44,631 [INFO]       → Training Epoch: 291
+2026-10-30 21:50:44,631 [INFO]       → Val Accuracy: 0.9952967166900635
+2026-10-30 21:50:44,646 [INFO] ✅ Model loaded successfully.
+2026-10-30 21:50:44,646 [INFO] --------------------------------------------------------------------------------
+2026-10-30 21:50:44,646 [INFO] 🌍 Server Configuration:
+2026-10-30 21:50:44,646 [INFO]    Host: 0.0.0.0
+2026-10-30 21:50:44,646 [INFO]    Port: 5000
+2026-10-30 21:50:44,646 [INFO]    Debug: False
+2026-10-30 21:50:44,646 [INFO]    Model: best_model.pt
+2026-10-30 21:50:44,646 [INFO] --------------------------------------------------------------------------------
+2026-10-30 21:50:44,646 [INFO] ✅ Server Ready to Accept Requests
+2026-10-30 21:50:44,646 [INFO] ================================================================================
+2026-10-30 21:50:44,662 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.160.2.168:5000
+2026-10-30 21:50:44,663 [INFO] [33mPress CTRL+C to quit[0m
+2026-10-30 21:50:55,710 [INFO] 127.0.0.1 - - [30/Oct/2026 21:50:55] "GET /health HTTP/1.1" 200 -
+2026-10-30 21:51:02,504 [INFO] 🔮 Prediction: Healthy-leaf (85.62%) in 280.2ms
+2026-10-30 21:51:02,514 [INFO] 127.0.0.1 - - [30/Oct/2026 21:51:02] "POST /predict HTTP/1.1" 200 -
+2026-10-30 21:51:10,570 [INFO] 🔮 Prediction: Die Back-leaf (100.00%) in 1.8ms
+2026-10-30 21:51:10,571 [INFO] 127.0.0.1 - - [30/Oct/2026 21:51:10] "POST /predict HTTP/1.1" 200 -
+2026-10-30 21:51:24,080 [INFO] 🔮 Prediction: Anthracnose-Fruit (85.55%) in 1.4ms
+2026-10-30 21:51:24,080 [INFO] 127.0.0.1 - - [30/Oct/2026 21:51:24] "POST /predict HTTP/1.1" 200 -
+2026-10-30 21:51:25,709 [INFO] 127.0.0.1 - - [30/Oct/2026 21:51:25] "GET /health HTTP/1.1" 200 -
+2026-10-30 21:51:31,981 [INFO] 🔮 Prediction: Black Mould Rot-Fruit (55.72%) in 2.3ms
+2026-10-30 21:51:31,982 [INFO] 127.0.0.1 - - [30/Oct/2026 21:51:31] "POST /predict HTTP/1.1" 200 -
