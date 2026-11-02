@@ -1,4 +1,4 @@
-// Disease treatment database - Enhanced Version
+// Disease treatment database 
 const treatmentDatabase = {
 'Healthy-leaf': {
 classification: 'classification-healthy',
