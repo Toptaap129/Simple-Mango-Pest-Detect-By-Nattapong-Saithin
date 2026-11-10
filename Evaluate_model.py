@@ -1,7 +1,3 @@
-"""
-Model Evaluation & Visualization Script
-Usage: python evaluate_model.py --checkpoint checkpoints/best_model.pt --data_path Dataset
-"""
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
